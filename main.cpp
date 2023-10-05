@@ -253,7 +253,7 @@ int main (int argc, char **argv)
 
     glutInitWindowPosition(100,100);
     glutInitWindowSize(1000,1000);
-    glutCreateWindow("Triangle-Demo");
+    glutCreateWindow("Highschool");
     glClearColor(0.5f, 0.5f, 0.8f, 1.0f);
     glShadeModel( GL_SMOOTH );
     glEnable( GL_DEPTH_TEST );

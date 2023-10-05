@@ -1,6 +1,0 @@
-This is a 
-newly 
-added another 
-file coming from 
-feature-new-things 
-branch

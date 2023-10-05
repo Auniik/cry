@@ -1,8 +1,0 @@
-This 
-
-is a 
-
-newly added
- file coming 
-    from feature-new-things 
-    branch
