@@ -175,6 +175,62 @@ void building() {
     glPopMatrix();
 }
 
+void walls() {
+    // left
+    glPushMatrix();
+    glTranslated(0, 0, 0);
+    glScaled(1, 10, 100);
+    cube(139.0/255, 87.0/255, 66.0/255);
+    glPopMatrix();
+
+
+    for (int i = 0; i < 100; i += 5)
+    {
+        // left i
+        glPushMatrix();
+        glTranslated(0, 0, i);
+        glScaled(1.2, 10, 0.1);
+        cube(23.0/255, 23.0/255, 23.0/255);
+        glPopMatrix();
+    }
+    
+
+    // back
+    glPushMatrix();
+    glTranslated(0, 0, 0);
+    glScaled(120, 10, 1);
+    cube(139.0/255, 87.0/255, 66.0/255);
+    glPopMatrix();
+
+    for (int i = 0; i < 120; i += 5)
+    {
+        // left i
+        glPushMatrix();
+        glTranslated(i, 0, 1);
+        glScaled(0.1, 10, 1);
+        cube(23.0/255, 23.0/255, 23.0/255);
+        glPopMatrix();
+    }
+
+    // right
+    glPushMatrix();
+    glTranslated(120, 0, 0);
+    glScaled(1, 10, 200);
+    cube(139.0/255, 87.0/255, 66.0/255);
+    glPopMatrix();
+
+    for (int i = 0; i < 120; i += 5)
+    {
+        // left i
+        glPushMatrix();
+        glTranslated(119.9, 0, i);
+        glScaled(1, 10, 0.1);
+        cube(23.0/255, 23.0/255, 23.0/255);
+        glPopMatrix();
+    }
+
+}
+
 static void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -191,19 +247,24 @@ static void display(void)
     // green field
     glPushMatrix();
     // glTranslated(-100,-1,-100);
-    glScaled(200, 0, 100);
+    glScaled(120, 0, 100);
     cube(0, 255, 0);
     glPopMatrix();
 
     glPushMatrix();
     glTranslated(20,0,0);
-
     building();
+    glPopMatrix();
 
+    glPushMatrix();
+    glTranslated(0,0,0);
+    walls();
     glPopMatrix();
 
     glutSwapBuffers();
 }
+
+
 
 static void key(unsigned char key, int x, int y)
 {
