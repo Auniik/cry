@@ -20,7 +20,7 @@ int t = 10;
 
 GLfloat eyeX = 50;
 GLfloat eyeY = 40 - 16;
-GLfloat eyeZ = 50 + 20 +15;
+GLfloat eyeZ = 50 + 20 + 15;
 
 GLfloat lookX = 50;
 GLfloat lookY = 0 + 20;
@@ -85,28 +85,28 @@ void cube(float r, float g, float b)
     glEnd();
 }
 
-void building() {
-// Building
+void building()
+{
+    // Building
     glPushMatrix();
-    glTranslated(0,0,10);
-    glScaled(70,30,20);
-    cube(0.5,0.1,0.2);
+    glTranslated(0, 0, 10);
+    glScaled(70, 30, 20);
+    cube(0.5, 0.1, 0.2);
     glPopMatrix();
 
     // Rooftop
     glPushMatrix();
-    glTranslated(0,30,10);
-    glScaled(70,1,22);
-    cube(0.74,0.74,0.74);
+    glTranslated(0, 30, 10);
+    glScaled(70, 1, 22);
+    cube(0.74, 0.74, 0.74);
     glPopMatrix();
 
     // Base
     glPushMatrix();
-    glTranslated(0,0,10);
-    glScaled(70,2,22);
-    cube(0.74,0.74,0.74);
+    glTranslated(0, 0, 10);
+    glScaled(70, 2, 22);
+    cube(0.74, 0.74, 0.74);
     glPopMatrix();
-
 
     // Gate
     glPushMatrix();
@@ -136,14 +136,12 @@ void building() {
     cube(0.5, 0.5, 0.5);
     glPopMatrix();
 
-
     // Line 3
     glPushMatrix();
     glTranslated(30, 0, 31);
     glScaled(0.7, 30, 0);
     cube(0.5, 0.5, 0.5);
     glPopMatrix();
-
 
     // Line 4
     glPushMatrix();
@@ -152,8 +150,7 @@ void building() {
     cube(0.5, 0.5, 0.5);
     glPopMatrix();
 
-
-     // Line 5
+    // Line 5
     glPushMatrix();
     glTranslated(50, 0, 31);
     glScaled(0.7, 30, 0);
@@ -175,14 +172,14 @@ void building() {
     glPopMatrix();
 }
 
-void walls() {
+void walls()
+{
     // left
     glPushMatrix();
     glTranslated(0, 0, 0);
     glScaled(1, 10, 100);
-    cube(139.0/255, 87.0/255, 66.0/255);
+    cube(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
-
 
     for (int i = 0; i < 100; i += 5)
     {
@@ -190,16 +187,15 @@ void walls() {
         glPushMatrix();
         glTranslated(0, 0, i);
         glScaled(1.2, 10, 0.1);
-        cube(23.0/255, 23.0/255, 23.0/255);
+        cube(23.0 / 255, 23.0 / 255, 23.0 / 255);
         glPopMatrix();
     }
-    
 
     // back
     glPushMatrix();
     glTranslated(0, 0, 0);
     glScaled(120, 10, 1);
-    cube(139.0/255, 87.0/255, 66.0/255);
+    cube(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
 
     for (int i = 0; i < 120; i += 5)
@@ -208,15 +204,15 @@ void walls() {
         glPushMatrix();
         glTranslated(i, 0, 1);
         glScaled(0.1, 10, 1);
-        cube(23.0/255, 23.0/255, 23.0/255);
+        cube(23.0 / 255, 23.0 / 255, 23.0 / 255);
         glPopMatrix();
     }
 
     // right
     glPushMatrix();
     glTranslated(120, 0, 0);
-    glScaled(1, 10, 200);
-    cube(139.0/255, 87.0/255, 66.0/255);
+    glScaled(1, 10, 120);
+    cube(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
 
     for (int i = 0; i < 120; i += 5)
@@ -225,10 +221,29 @@ void walls() {
         glPushMatrix();
         glTranslated(119.9, 0, i);
         glScaled(1, 10, 0.1);
-        cube(23.0/255, 23.0/255, 23.0/255);
+        cube(23.0 / 255, 23.0 / 255, 23.0 / 255);
         glPopMatrix();
     }
+}
 
+void sun(void)
+{
+    glColor3f(1.0, 1.0, 0.0);
+    glTranslated(35, 70, 0);
+    glutSolidSphere(5.2, 25, 20);
+    glLineWidth(2.0);
+    glBegin(GL_LINES);
+    for (int i = 0; i < 12; i++)
+    {
+        float angle = i * (2.0 * M_PI / 5.2);
+        float x1 = 0.0;
+        float y1 = 0.0;
+        float x2 = 10 * cos(angle);
+        float y2 = 10 * sin(angle);
+        glVertex3f(x1, y1, 0.0);
+        glVertex3f(x2, y2, 0.0);
+    }
+    glEnd();
 }
 
 static void display(void)
@@ -251,20 +266,25 @@ static void display(void)
     cube(0, 255, 0);
     glPopMatrix();
 
+    // SUN
     glPushMatrix();
-    glTranslated(20,0,0);
+    sun();
+    glPopMatrix();
+
+    // Building
+    glPushMatrix();
+    glTranslated(20, 0, 0);
     building();
     glPopMatrix();
 
+    // Walls
     glPushMatrix();
-    glTranslated(0,0,0);
+    glTranslated(0, 0, 0);
     walls();
     glPopMatrix();
 
     glutSwapBuffers();
 }
-
-
 
 static void key(unsigned char key, int x, int y)
 {
@@ -330,4 +350,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
