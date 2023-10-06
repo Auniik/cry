@@ -249,75 +249,70 @@ void sun(void)
 void pyramid()
 {
     glBegin(GL_TRIANGLES);
-    
+
     // Define the vertices of the pyramid
     // Base
-    glVertex3f(-1.0, 0.0, -1.0);  // Vertex 1
-    glVertex3f(1.0, 0.0, -1.0);   // Vertex 2
-    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+    glVertex3f(-1.0, 0.0, -1.0); // Vertex 1
+    glVertex3f(1.0, 0.0, -1.0);  // Vertex 2
+    glVertex3f(1.0, 0.0, 1.0);   // Vertex 3
 
-    glVertex3f(-1.0, 0.0, -1.0);  // Vertex 1
-    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
-    glVertex3f(-1.0, 0.0, 1.0);   // Vertex 4
+    glVertex3f(-1.0, 0.0, -1.0); // Vertex 1
+    glVertex3f(1.0, 0.0, 1.0);   // Vertex 3
+    glVertex3f(-1.0, 0.0, 1.0);  // Vertex 4
 
     // Front Face
-    glVertex3f(0.0, 20.0, 0.0);    // Vertex 5
-    glVertex3f(-1.0, 0.0, 1.0);   // Vertex 4
-    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+    glVertex3f(0.0, 20.0, 0.0); // Vertex 5
+    glVertex3f(-1.0, 0.0, 1.0); // Vertex 4
+    glVertex3f(1.0, 0.0, 1.0);  // Vertex 3
 
     // Left Face
-    glVertex3f(0.0, 20.0, 0.0);    // Vertex 5
-    glVertex3f(-1.0, 0.0, -1.0);  // Vertex 1
-    glVertex3f(-1.0, 0.0, 1.0);   // Vertex 4
+    glVertex3f(0.0, 20.0, 0.0);  // Vertex 5
+    glVertex3f(-1.0, 0.0, -1.0); // Vertex 1
+    glVertex3f(-1.0, 0.0, 1.0);  // Vertex 4
 
     // Right Face
-    glVertex3f(0.0, 20.0, 0.0);    // Vertex 5
-    glVertex3f(1.0, 0.0, -1.0);   // Vertex 2
-    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+    glVertex3f(0.0, 20.0, 0.0); // Vertex 5
+    glVertex3f(1.0, 0.0, -1.0); // Vertex 2
+    glVertex3f(1.0, 0.0, 1.0);  // Vertex 3
 
     glEnd();
 }
 
-void trees() {
-    
+void trees()
+{
+
     for (int i = 0; i < 100; i += 5)
     {
-        
+
         glPushMatrix();
         glTranslated(5, 0, i);
         glScaled(0.5, 20, 0.5);
-        cube(139.0 / 255,  121.0 / 255,  94.0 / 255);
+        cube(139.0 / 255, 121.0 / 255, 94.0 / 255);
         glPopMatrix();
 
         glPushMatrix();
-        glTranslated(5.5, 7, i+0.3);
-        glColor3f(0.0/255,   139.0/255,   69.0/255);
+        glTranslated(5.5, 7, i + 0.3);
+        glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
         pyramid();
         glPopMatrix();
 
         glPushMatrix();
-        glTranslated(5.5, 10, i+0.3);
-        glColor3f(46.0/255, 139.0/255, 87.0/255);
+        glTranslated(5.5, 10, i + 0.3);
+        glColor3f(46.0 / 255, 139.0 / 255, 87.0 / 255);
         pyramid();
         glPopMatrix();
 
         glPushMatrix();
-        glTranslated(5.5, 13, i+0.3);
-        glColor3f(40.0/255, 140.0/255, 80.0/255);
+        glTranslated(5.5, 13, i + 0.3);
+        glColor3f(40.0 / 255, 140.0 / 255, 80.0 / 255);
         pyramid();
         glPopMatrix();
-
     }
-
-
 }
 
 void minar()
 {
-
 }
-
-
 
 static void display(void)
 {
@@ -336,15 +331,13 @@ static void display(void)
     glPushMatrix();
     // glTranslated(-100,-1,-100);
     glScaled(120, 0, 100);
-    cube(162.0/255,   205.0/255,  90.0/255);
+    cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
     glPopMatrix();
 
     // SUN
     glPushMatrix();
     sun();
     glPopMatrix();
-
-    
 
     // Building
     glPushMatrix();
