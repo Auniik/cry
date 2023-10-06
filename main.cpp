@@ -312,6 +312,42 @@ void trees()
 
 void minar()
 {
+
+    // base
+    glPushMatrix();
+    glTranslated(0, 0, 16);
+    glScaled(25, 2, 7);
+    cube(139.0/255, 137.0/255, 137.0/255);
+    glPopMatrix();
+
+    // Piller
+    glPushMatrix();
+    glTranslated(2, 1, 18);
+    glScaled(2, 15, 1);
+    cube(1, 1, 1);
+    glPopMatrix();
+
+    // Middle Piller
+    glPushMatrix();
+    glTranslated(9.5, 1, 18);
+    glScaled(5, 18, 1);
+    cube(1, 1, 1);
+    glPopMatrix();
+
+    // Right Piller
+    glPushMatrix();
+    glTranslated(20, 1, 18);
+    glScaled(2, 15, 1);
+    cube(1, 1, 1);
+    glPopMatrix();
+
+
+    // sun
+
+    glColor3f(1.0, 0.0, 0.0);
+    glTranslated(12, 13, 18);
+    glutSolidSphere(2.2, 28, 20);
+
 }
 
 static void display(void)
@@ -357,9 +393,9 @@ static void display(void)
     trees();
     glPopMatrix();
 
-    // Trees
+    // Minar
     glPushMatrix();
-    glTranslated(80, 0, 0);
+    glTranslated(85, 0, 7);
     minar();
     glPopMatrix();
 
