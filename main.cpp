@@ -246,6 +246,63 @@ void sun(void)
     glEnd();
 }
 
+void pyramid()
+{
+    glBegin(GL_TRIANGLES);
+    
+    // Define the vertices of the pyramid
+    // Base
+    glVertex3f(-1.0, 0.0, -1.0);  // Vertex 1
+    glVertex3f(1.0, 0.0, -1.0);   // Vertex 2
+    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+
+    glVertex3f(-1.0, 0.0, -1.0);  // Vertex 1
+    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+    glVertex3f(-1.0, 0.0, 1.0);   // Vertex 4
+
+    // Front Face
+    glVertex3f(0.0, 30.0, 0.0);    // Vertex 5
+    glVertex3f(-1.0, 0.0, 1.0);   // Vertex 4
+    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+
+    // Left Face
+    glVertex3f(0.0, 30.0, 0.0);    // Vertex 5
+    glVertex3f(-1.0, 0.0, -1.0);  // Vertex 1
+    glVertex3f(-1.0, 0.0, 1.0);   // Vertex 4
+
+    // Right Face
+    glVertex3f(0.0, 30.0, 0.0);    // Vertex 5
+    glVertex3f(1.0, 0.0, -1.0);   // Vertex 2
+    glVertex3f(1.0, 0.0, 1.0);    // Vertex 3
+
+    glEnd();
+}
+
+void trees() {
+    
+    for (int i = 0; i < 100; i += 5)
+    {
+        
+        glPushMatrix();
+        glTranslated(5, 0, i);
+        glScaled(0.5, 20, 0.5);
+        cube(139.0 / 255,  121.0 / 255,  94.0 / 255);
+        glPopMatrix();
+
+        glPushMatrix();
+        
+        glTranslated(5.5, 10, i+0.3);
+        glColor3f(46.0/255, 139.0/255, 87.0/255);
+        pyramid();
+        glPopMatrix();
+
+    }
+
+
+}
+
+
+
 static void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -271,9 +328,11 @@ static void display(void)
     sun();
     glPopMatrix();
 
+    
+
     // Building
     glPushMatrix();
-    glTranslated(20, 0, 0);
+    glTranslated(10, 0, 0);
     building();
     glPopMatrix();
 
@@ -281,6 +340,12 @@ static void display(void)
     glPushMatrix();
     glTranslated(0, 0, 0);
     walls();
+    glPopMatrix();
+
+    // Trees
+    glPushMatrix();
+    glTranslated(0, 0, 0);
+    trees();
     glPopMatrix();
 
     glutSwapBuffers();
