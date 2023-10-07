@@ -296,6 +296,25 @@ void sideTree() {
     glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
     glutSolidSphere(3, 5, 5);
     glPopMatrix();
+
+    for (int i = 0; i < 50; i = i + 2)
+    {
+        glPushMatrix();
+        glTranslated(9, 0, i);
+        glScaled(0.3, 5, 0.1);
+        cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+        glPopMatrix();
+    }
+
+    for (int i = 10; i < 30; i = i + 2)
+    {
+        glPushMatrix();
+        glTranslated(i, 0, 50);
+        glScaled(0.3, 5, 0.1);
+        cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+        glPopMatrix();
+    }
+    
 }
 
 void gate() {
@@ -340,7 +359,7 @@ void gate() {
 
     
 
-    for (int i = 47; i < 110; i++)
+    for (int i = 47; i < 140; i++)
     {
         glPushMatrix();
         glTranslated(i, 0, 98);
@@ -608,7 +627,13 @@ static void display(void)
     // green field
     glPushMatrix();
     // glTranslated(-100,-1,-100);
-    glScaled(150, 0, 100);
+    glScaled(125, 0, 100);
+    cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(125, 0, 60);
+    glScaled(25, 0, 40);
     cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
     glPopMatrix();
 
