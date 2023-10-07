@@ -149,61 +149,24 @@ void building()
     cubeWithBorder(0.74, 0.74, 0.74, 20);
     glPopMatrix();
 
-    // Gate
-    glPushMatrix();
-    glTranslated(30.5, 0, 29.5);
-    glScaled(9.5, 15, 1);
-    cube(0.33, 0.33, 0.33);
-    glPopMatrix();
+    for (float i = 30.5; i < 30.5 + 9.5; i = i + 0.7)
+    {
+        glPushMatrix();
+        glTranslated(i, 0, 29.5);
+        glScaled(0.4, 15, 1);
+        cube(0, 0, 0);
+        glPopMatrix();
+    }
 
-    // Gate separator
-    glPushMatrix();
-    glTranslated(35, 1, 32);
-    glScaled(0.3, 13, 0);
-    cube(0.7, 0.7, 0.7);
-    glPopMatrix();
-
-    // Line 1
-    glPushMatrix();
-    glTranslated(10, 0, 31);
-    glScaled(0.7, 30, 0);
-    cube(0.5, 0.5, 0.5);
-    glPopMatrix();
-
-    // Line 2
-    glPushMatrix();
-    glTranslated(20, 0, 31);
-    glScaled(0.7, 30, 0);
-    cube(0.5, 0.5, 0.5);
-    glPopMatrix();
-
-    // Line 3
-    glPushMatrix();
-    glTranslated(30, 0, 31);
-    glScaled(0.7, 30, 0);
-    cube(0.5, 0.5, 0.5);
-    glPopMatrix();
-
-    // Line 4
-    glPushMatrix();
-    glTranslated(40, 0, 31);
-    glScaled(0.7, 30, 0);
-    cube(0.5, 0.5, 0.5);
-    glPopMatrix();
-
-    // Line 5
-    glPushMatrix();
-    glTranslated(50, 0, 31);
-    glScaled(0.7, 30, 0);
-    cube(0.5, 0.5, 0.5);
-    glPopMatrix();
-
-    // Line 6
-    glPushMatrix();
-    glTranslated(60, 0, 31);
-    glScaled(0.7, 30, 0);
-    cube(0.5, 0.5, 0.5);
-    glPopMatrix();
+    for (int i = 10; i <= 60; i = i + 10) {
+        // Line 1
+        glPushMatrix();
+        glTranslated(i, 0, 31);
+        glScaled(0.7, 30, 0);
+        cube(0.5, 0.5, 0.5);
+        glPopMatrix();
+    }
+    
 
     // Horizontal Line 1
     glPushMatrix();
@@ -211,6 +174,11 @@ void building()
     glScaled(70, 3, 0);
     cube(0.5, 0.5, 0.5);
     glPopMatrix();
+}
+
+
+void sideBuilding() {
+
 }
 
 void gate() {
@@ -289,11 +257,11 @@ void walls()
     // back
     glPushMatrix();
     glTranslated(0, 0, 0);
-    glScaled(120, 10, 1);
+    glScaled(150, 10, 1);
     cube(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
 
-    for (int i = 0; i < 120; i += 5)
+    for (int i = 0; i < 150; i += 5)
     {
         // left i
         glPushMatrix();
@@ -305,7 +273,7 @@ void walls()
 
     // right
     glPushMatrix();
-    glTranslated(120, 0, 0);
+    glTranslated(150, 0, 0);
     glScaled(1, 10, 100);
     cube(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
@@ -314,7 +282,7 @@ void walls()
     {
         // left i
         glPushMatrix();
-        glTranslated(119.9, 0, i);
+        glTranslated(149, 0, i);
         glScaled(1, 10, 0.1);
         cube(23.0 / 255, 23.0 / 255, 23.0 / 255);
         glPopMatrix();
@@ -534,7 +502,7 @@ static void display(void)
     // green field
     glPushMatrix();
     // glTranslated(-100,-1,-100);
-    glScaled(120, 0, 100);
+    glScaled(150, 0, 100);
     cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
     glPopMatrix();
 
@@ -550,7 +518,19 @@ static void display(void)
     building();
     glPopMatrix();
 
-    // Building
+    // Building 2
+    glPushMatrix();
+    glTranslated(30, 0, 0);
+    building();
+    glPopMatrix();
+
+    // Building 3
+    glPushMatrix();
+    glTranslated(10, 0, 0);
+    sideBuilding();
+    glPopMatrix();
+
+    // Gate
     glPushMatrix();
     glTranslated(10, 0, 0);
     gate();
@@ -570,7 +550,7 @@ static void display(void)
 
     // Minar
     glPushMatrix();
-    glTranslated(85, 0, 7);
+    glTranslated(10, 0, 70);
     minar();
     glPopMatrix();
 
