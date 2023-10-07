@@ -295,7 +295,7 @@ void sun(void)
     glPushMatrix();
     
     glColor3f(255.0/255.0, 185.0/255.0, 15.0/255.0);
-    glTranslated(36, 92, 10);
+    glTranslated(36, 97, 2);
     glutSolidSphere(3, 25, 20);
     glPopMatrix();
 
