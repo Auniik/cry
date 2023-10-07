@@ -20,7 +20,7 @@ int t = 10;
 
 GLfloat eyeX = 50;
 GLfloat eyeY = 25;
-GLfloat eyeZ = 50 + 20 + 25 + 20;
+GLfloat eyeZ = 50 + 20 + 25 + 20 + 6;
 
 GLfloat lookX = 50;
 GLfloat lookY = 0 + 20;
@@ -83,7 +83,6 @@ void circle(float centerX, float centerY, float radius)
 
     glEnd();
 }
-
 
 void cube(float r, float g, float b)
 {
@@ -153,7 +152,8 @@ void building(int hasExtension = 0)
     cubeWithBorder(0.5, 0.1, 0.2, 100);
     glPopMatrix();
 
-    if (hasExtension == 1) {
+    if (hasExtension == 1)
+    {
         glPushMatrix();
         glTranslated(45, 30, 8);
         glScaled(10, 15, 20);
@@ -175,7 +175,6 @@ void building(int hasExtension = 0)
     cubeWithBorder(0.74, 0.74, 0.74, -100);
     glPopMatrix();
 
-
     // Base
     glPushMatrix();
     glTranslated(-1, 0, 10);
@@ -192,7 +191,8 @@ void building(int hasExtension = 0)
         glPopMatrix();
     }
 
-    for (int i = 10; i <= 60; i = i + 10) {
+    for (int i = 10; i <= 60; i = i + 10)
+    {
         // Line 1
         glPushMatrix();
         glTranslated(i, 0, 31);
@@ -200,7 +200,6 @@ void building(int hasExtension = 0)
         cube(0.5, 0.5, 0.5);
         glPopMatrix();
     }
-    
 
     // Horizontal Line 1
     glPushMatrix();
@@ -210,8 +209,8 @@ void building(int hasExtension = 0)
     glPopMatrix();
 }
 
-
-void sideTree() {
+void sideTree()
+{
 
     // Base
     glPushMatrix();
@@ -245,20 +244,17 @@ void sideTree() {
     glutSolidSphere(4, 25, 20);
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslated(10, 40, 12);
     glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
     glutSolidSphere(3, 25, 20);
     glPopMatrix();
 
-
     glPushMatrix();
     glTranslated(-5, 35, 10);
     glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
     glutSolidSphere(4.5, 5, 20);
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslated(0, 40, 10);
@@ -271,7 +267,6 @@ void sideTree() {
     glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
     glutSolidSphere(10, 10, 20);
     glPopMatrix();
-
 
     glPushMatrix();
     glTranslated(12, 32, 10);
@@ -314,10 +309,10 @@ void sideTree() {
         cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
         glPopMatrix();
     }
-    
 }
 
-void gate() {
+void gate()
+{
     // Base
     for (int i = -10; i < 35; i++)
     {
@@ -350,14 +345,11 @@ void gate() {
         glPopMatrix();
     }
 
-
     glPushMatrix();
     glTranslated(45.5, 0, 97);
     glScaled(1, 15, 1);
     cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
-
-    
 
     for (int i = 47; i < 140; i++)
     {
@@ -367,14 +359,12 @@ void gate() {
         cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
         glPopMatrix();
     }
-    
 
     glPushMatrix();
     glTranslated(40.5, 5.5, 97);
-    glColor3f(139.0/255, 131.0/255, 120.0/255);
+    glColor3f(139.0 / 255, 131.0 / 255, 120.0 / 255);
     circle(0.1, 0.1, 2.0);
     glPopMatrix();
-    
 }
 
 void walls()
@@ -435,8 +425,8 @@ void sun(void)
 {
     // SUN
     glPushMatrix();
-    
-    glColor3f(255.0/255.0, 185.0/255.0, 15.0/255.0);
+
+    glColor3f(255.0 / 255.0, 185.0 / 255.0, 15.0 / 255.0);
     glTranslated(36, 97, 2);
     glutSolidSphere(3, 25, 20);
     glPopMatrix();
@@ -467,7 +457,6 @@ void sun(void)
         glVertex3f(x2, y2, 0.0);
     }
     glEnd();
-
 }
 
 void pyramid(int frontFace = 20.0)
@@ -501,7 +490,6 @@ void pyramid(int frontFace = 20.0)
 
     glEnd();
 }
-
 
 void trees()
 {
@@ -573,7 +561,6 @@ void minar()
     glutSolidSphere(2.2, 28, 20);
 }
 
-
 void flag()
 {
     // base
@@ -637,12 +624,27 @@ static void display(void)
     cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
     glPopMatrix();
 
+    // ROAD
+    glPushMatrix();
+    glTranslated(0, 0, 100);
+    glScaled(150, 1, 6);
+    cube(112.0 / 255, 128.0 / 255, 144.0 / 255);
+    glPopMatrix();
+
+    for (int i = 5; i <= 150; i = i + 5)
+    {
+        glPushMatrix();
+        glTranslated(i, 0, 103.7);
+        glScaled(3, 1.5, 0.01);
+        cube(1, 1, 1);
+        glPopMatrix();
+    }
+
     // SUN
     glPushMatrix();
     sun();
     glPopMatrix();
 
-    
     // Building
     glPushMatrix();
     glTranslated(10, 0, 0);
