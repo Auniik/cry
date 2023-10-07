@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "istream": "cpp",
+        "mutex": "cpp",
+        "ostream": "cpp",
+        "shared_mutex": "cpp",
+        "regex": "cpp",
+        "cmath": "cpp",
+        "bit": "cpp",
+        "*.tcc": "cpp",
+        "fstream": "cpp",
+        "complex": "cpp"
+    }
+}

@@ -20,7 +20,7 @@ int t = 10;
 
 GLfloat eyeX = 50;
 GLfloat eyeY = 40 - 16;
-GLfloat eyeZ = 50 + 20 + 15;
+GLfloat eyeZ = 50 + 20 + 25;
 
 GLfloat lookX = 50;
 GLfloat lookY = 0 + 20;
@@ -85,33 +85,80 @@ void cube(float r, float g, float b)
     glEnd();
 }
 
+void cubeWithBorder(float r, float g, float b, int borderIntensity = 50)
+{
+    glBegin(GL_QUADS);
+    glColor3f(r, g, b);
+    for (GLint i = 0; i < 6; i++)
+    {
+        getNormal3p(v_cube[c_ind[i][0]][0], v_cube[c_ind[i][0]][1], v_cube[c_ind[i][0]][2],
+                    v_cube[c_ind[i][1]][0], v_cube[c_ind[i][1]][1], v_cube[c_ind[i][1]][2],
+                    v_cube[c_ind[i][2]][0], v_cube[c_ind[i][2]][1], v_cube[c_ind[i][2]][2]);
+
+        for (GLint j = 0; j < 4; j++)
+        {
+            glVertex3fv(&v_cube[c_ind[i][j]][0]);
+        }
+    }
+    glEnd();
+
+    glColor3f(((r * 255.0) + borderIntensity) / 255.0, ((g * 255.0) + borderIntensity) / 255.0, ((b * 255.0) + borderIntensity) / 255.0);
+    for (GLint i = 0; i < 12; i++)
+    {
+        glBegin(GL_LINE_LOOP);
+        glVertex3fv(&v_cube[c_ind[i][0]][0]);
+        glVertex3fv(&v_cube[c_ind[i][1]][0]);
+        glVertex3fv(&v_cube[c_ind[i][2]][0]);
+        glVertex3fv(&v_cube[c_ind[i][3]][0]);
+        glEnd();
+    }
+}
+
+void renderBitmapString(float x, float y, void *font, const char *string)
+{
+    glRasterPos2f(x, y);
+
+    while (*string)
+    {
+        glutBitmapCharacter(font, *string);
+        string++;
+    }
+}
+
 void building()
 {
     // Building
     glPushMatrix();
     glTranslated(0, 0, 10);
     glScaled(70, 30, 20);
-    cube(0.5, 0.1, 0.2);
+    cubeWithBorder(0.5, 0.1, 0.2, 100);
     glPopMatrix();
 
     // Rooftop
     glPushMatrix();
     glTranslated(0, 30, 10);
-    glScaled(70, 1, 22);
-    cube(0.74, 0.74, 0.74);
+    glScaled(70, 5, 21);
+    cubeWithBorder(0.74, 0.74, 0.74, -100);
     glPopMatrix();
+
+    // glPushMatrix();
+    // glTranslated(30, 31, 32);
+    // float x = -0.5;
+    // float y = 0.8;
+    // renderBitmapString(x, y, GLUT_BITMAP_HELVETICA_18, "SEU High School");
+    // glPopMatrix();
 
     // Base
     glPushMatrix();
-    glTranslated(0, 0, 10);
-    glScaled(70, 2, 22);
-    cube(0.74, 0.74, 0.74);
+    glTranslated(-1, 0, 10);
+    glScaled(72, 2, 22);
+    cubeWithBorder(0.74, 0.74, 0.74, 20);
     glPopMatrix();
 
     // Gate
     glPushMatrix();
-    glTranslated(30, 0, 30);
-    glScaled(10, 15, 1);
+    glTranslated(30.5, 0, 29.5);
+    glScaled(9.5, 15, 1);
     cube(0.33, 0.33, 0.33);
     glPopMatrix();
 
@@ -211,11 +258,11 @@ void walls()
     // right
     glPushMatrix();
     glTranslated(120, 0, 0);
-    glScaled(1, 10, 120);
+    glScaled(1, 10, 100);
     cube(139.0 / 255, 87.0 / 255, 66.0 / 255);
     glPopMatrix();
 
-    for (int i = 0; i < 120; i += 5)
+    for (int i = 0; i < 100; i += 5)
     {
         // left i
         glPushMatrix();
@@ -252,28 +299,28 @@ void pyramid()
 
     // Define the vertices of the pyramid
     // Base
-    glVertex3f(-1.0, 0.0, -1.0); // Vertex 1
-    glVertex3f(1.0, 0.0, -1.0);  // Vertex 2
-    glVertex3f(1.0, 0.0, 1.0);   // Vertex 3
+    glVertex3f(-1.0, 0.0, -1.0);
+    glVertex3f(1.0, 0.0, -1.0);
+    glVertex3f(1.0, 0.0, 1.0);
 
-    glVertex3f(-1.0, 0.0, -1.0); // Vertex 1
-    glVertex3f(1.0, 0.0, 1.0);   // Vertex 3
-    glVertex3f(-1.0, 0.0, 1.0);  // Vertex 4
+    glVertex3f(-1.0, 0.0, -1.0);
+    glVertex3f(1.0, 0.0, 1.0);
+    glVertex3f(-1.0, 0.0, 1.0);
 
     // Front Face
-    glVertex3f(0.0, 20.0, 0.0); // Vertex 5
-    glVertex3f(-1.0, 0.0, 1.0); // Vertex 4
-    glVertex3f(1.0, 0.0, 1.0);  // Vertex 3
+    glVertex3f(0.0, 20.0, 0.0);
+    glVertex3f(-1.0, 0.0, 1.0);
+    glVertex3f(1.0, 0.0, 1.0);
 
     // Left Face
-    glVertex3f(0.0, 20.0, 0.0);  // Vertex 5
-    glVertex3f(-1.0, 0.0, -1.0); // Vertex 1
-    glVertex3f(-1.0, 0.0, 1.0);  // Vertex 4
+    glVertex3f(0.0, 20.0, 0.0);
+    glVertex3f(-1.0, 0.0, -1.0);
+    glVertex3f(-1.0, 0.0, 1.0);
 
     // Right Face
-    glVertex3f(0.0, 20.0, 0.0); // Vertex 5
-    glVertex3f(1.0, 0.0, -1.0); // Vertex 2
-    glVertex3f(1.0, 0.0, 1.0);  // Vertex 3
+    glVertex3f(0.0, 20.0, 0.0);
+    glVertex3f(1.0, 0.0, -1.0);
+    glVertex3f(1.0, 0.0, 1.0);
 
     glEnd();
 }
@@ -317,7 +364,7 @@ void minar()
     glPushMatrix();
     glTranslated(0, 0, 16);
     glScaled(25, 2, 7);
-    cube(139.0/255, 137.0/255, 137.0/255);
+    cubeWithBorder(139.0 / 255, 137.0 / 255, 137.0 / 255);
     glPopMatrix();
 
     // Piller
@@ -341,13 +388,66 @@ void minar()
     cube(1, 1, 1);
     glPopMatrix();
 
-
     // sun
 
     glColor3f(1.0, 0.0, 0.0);
     glTranslated(12, 13, 18);
     glutSolidSphere(2.2, 28, 20);
+}
 
+void circle(float centerX, float centerY, float radius)
+{
+    glBegin(GL_TRIANGLE_FAN);
+
+    int NUM_SEGMENTS = 24;
+
+    for (int i = 0; i <= NUM_SEGMENTS; i++)
+    {
+        float angle = 2.0 * 3.1416 * i / NUM_SEGMENTS;
+        float x = centerX + radius * cos(angle);
+        float y = centerY + radius * sin(angle);
+
+        glVertex2f(x, y);
+    }
+
+    glEnd();
+}
+
+void flag()
+{
+    // base
+    glPushMatrix();
+    glTranslated(3.25, 0, 38);
+    glScaled(5, 1, 4);
+    cubeWithBorder(139.0 / 255, 137.0 / 255, 137.0 / 255);
+    glPopMatrix();
+
+    // 2nd base
+    glPushMatrix();
+    glTranslated(4.5, 0, 39);
+    glScaled(2.5, 2, 2);
+    cubeWithBorder(139.0 / 255, 137.0 / 255, 137.0 / 255);
+    glPopMatrix();
+
+    // Stand
+    glPushMatrix();
+    glTranslated(5.5, 0, 40);
+    glScaled(0.5, 20, 0.5);
+    cube(0, 0, 0);
+    glPopMatrix();
+
+    // Flag
+    glPushMatrix();
+    glTranslated(6, 16, 40);
+    glScaled(5, 3.5, 0);
+    cubeWithBorder(46.0 / 255, 139.0 / 255, 87.0 / 255);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(8, 17.7, 40.1);
+    glColor3f(1.0, 0.0, 0.0);
+    circle(0.0, 0.0, 1.1);
+    glPopMatrix();
 }
 
 static void display(void)
@@ -397,6 +497,12 @@ static void display(void)
     glPushMatrix();
     glTranslated(85, 0, 7);
     minar();
+    glPopMatrix();
+
+    // Flag
+    glPushMatrix();
+    glTranslated(47, 0, 5);
+    flag();
     glPopMatrix();
 
     glutSwapBuffers();
