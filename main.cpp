@@ -211,8 +211,91 @@ void building(int hasExtension = 0)
 }
 
 
-void sideBuilding() {
+void sideTree() {
 
+    // Base
+    glPushMatrix();
+    glTranslated(0, 0, 10);
+    glScaled(2, 20, 2);
+    cube(139.0 / 255, 121.0 / 255, 94.0 / 255);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(1.5, 20, 10);
+    glScaled(2, 8, 2);
+    cube(139.0 / 255, 121.0 / 255, 94.0 / 255);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(3, 26, 10);
+    glScaled(2, 8, 2);
+    cube(139.0 / 255, 121.0 / 255, 94.0 / 255);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(3, 33, 10);
+    glScaled(2.8, 8, 2);
+    cube(139.0 / 255, 121.0 / 255, 94.0 / 255);
+    glPopMatrix();
+
+    // Leaf
+    glPushMatrix();
+    glTranslated(0, 33, 10);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(4, 25, 20);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslated(10, 40, 12);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(3, 25, 20);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslated(-5, 35, 10);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(4.5, 5, 20);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslated(0, 40, 10);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(3, 25, 20);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(-7, 50, 10);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(10, 10, 20);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    glTranslated(12, 32, 10);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(6, 5, 20);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(14, 48, 15);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(12, 4, 12);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(4, 57, 15);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(5, 15, 12);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslated(3, 0, 12);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    glutSolidSphere(3, 5, 5);
+    glPopMatrix();
 }
 
 void gate() {
@@ -549,8 +632,8 @@ static void display(void)
 
     // Building 3
     glPushMatrix();
-    glTranslated(10, 0, 0);
-    sideBuilding();
+    glTranslated(115, 0, 15);
+    sideTree();
     glPopMatrix();
 
     // Gate
