@@ -293,7 +293,7 @@ void sun(void)
     glEnd();
 }
 
-void pyramid()
+void pyramid(int frontFace = 20.0)
 {
     glBegin(GL_TRIANGLES);
 
@@ -308,17 +308,17 @@ void pyramid()
     glVertex3f(-1.0, 0.0, 1.0);
 
     // Front Face
-    glVertex3f(0.0, 20.0, 0.0);
+    glVertex3f(0.0, frontFace, 0.0);
     glVertex3f(-1.0, 0.0, 1.0);
     glVertex3f(1.0, 0.0, 1.0);
 
     // Left Face
-    glVertex3f(0.0, 20.0, 0.0);
+    glVertex3f(0.0, frontFace, 0.0);
     glVertex3f(-1.0, 0.0, -1.0);
     glVertex3f(-1.0, 0.0, 1.0);
 
     // Right Face
-    glVertex3f(0.0, 20.0, 0.0);
+    glVertex3f(0.0, frontFace, 0.0);
     glVertex3f(1.0, 0.0, -1.0);
     glVertex3f(1.0, 0.0, 1.0);
 
@@ -371,21 +371,21 @@ void minar()
     glPushMatrix();
     glTranslated(2, 1, 18);
     glScaled(2, 15, 1);
-    cube(1, 1, 1);
+    cubeWithBorder(1.0, 1.0, 1.0, -28);
     glPopMatrix();
 
     // Middle Piller
     glPushMatrix();
     glTranslated(9.5, 1, 18);
     glScaled(5, 18, 1);
-    cube(1, 1, 1);
+    cubeWithBorder(1.0, 1.0, 1.0, -28);
     glPopMatrix();
 
     // Right Piller
     glPushMatrix();
     glTranslated(20, 1, 18);
     glScaled(2, 15, 1);
-    cube(1, 1, 1);
+    cubeWithBorder(1.0, 1.0, 1.0, -28);
     glPopMatrix();
 
     // sun
@@ -456,7 +456,7 @@ static void display(void)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    glFrustum(-3, 3, -3, 3, 2.0, 100.0);
+    glFrustum(-3, 3, -3, 3, 2.0, 500.0);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -468,6 +468,13 @@ static void display(void)
     // glTranslated(-100,-1,-100);
     glScaled(120, 0, 100);
     cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
+    glPopMatrix();
+
+    // Background trees
+    glPushMatrix();
+    glTranslated(30,10,50);
+    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
+    pyramid(5.0);
     glPopMatrix();
 
     // SUN
