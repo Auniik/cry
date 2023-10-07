@@ -19,8 +19,8 @@ const int height = 1000;
 int t = 10;
 
 GLfloat eyeX = 50;
-GLfloat eyeY = 40 - 16;
-GLfloat eyeZ = 50 + 20 + 25;
+GLfloat eyeY = 25;
+GLfloat eyeZ = 50 + 20 + 25 + 20;
 
 GLfloat lookX = 50;
 GLfloat lookY = 0 + 20;
@@ -141,12 +141,6 @@ void building()
     cubeWithBorder(0.74, 0.74, 0.74, -100);
     glPopMatrix();
 
-    // glPushMatrix();
-    // glTranslated(30, 31, 32);
-    // float x = -0.5;
-    // float y = 0.8;
-    // renderBitmapString(x, y, GLUT_BITMAP_HELVETICA_18, "SEU High School");
-    // glPopMatrix();
 
     // Base
     glPushMatrix();
@@ -219,6 +213,60 @@ void building()
     glPopMatrix();
 }
 
+void gate() {
+    // Base
+    for (int i = -10; i < 35; i++)
+    {
+        glPushMatrix();
+        glTranslated(i, 0, 98);
+        glScaled(0.3, 10, 0.1);
+        cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+        glPopMatrix();
+    }
+
+    glPushMatrix();
+    glTranslated(35, 0, 97);
+    glScaled(1, 15, 1);
+    cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+    glPopMatrix();
+
+    // HEAD
+    glPushMatrix();
+    glTranslated(33.2, 15, 97);
+    glScaled(15, 2, 1);
+    cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+    glPopMatrix();
+
+    for (float i = 36.0; i < 46.0; i = i + 0.45)
+    {
+        glPushMatrix();
+        glTranslated(i, 0, 97);
+        glScaled(0.1, 10, 0);
+        cubeWithBorder(0, 0, 0);
+        glPopMatrix();
+    }
+
+
+    glPushMatrix();
+    glTranslated(45.5, 0, 97);
+    glScaled(1, 15, 1);
+    cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+    glPopMatrix();
+
+    
+
+    for (int i = 47; i < 110; i++)
+    {
+        glPushMatrix();
+        glTranslated(i, 0, 98);
+        glScaled(0.3, 10, 0.1);
+        cubeWithBorder(139.0 / 255, 87.0 / 255, 66.0 / 255);
+        glPopMatrix();
+    }
+    
+    
+}
+
 void walls()
 {
     // left
@@ -275,8 +323,16 @@ void walls()
 
 void sun(void)
 {
+    // SUN
+    glPushMatrix();
+    
+    glColor3f(255.0/255.0, 185.0/255.0, 15.0/255.0);
+    glTranslated(36, 92, 10);
+    glutSolidSphere(3, 25, 20);
+    glPopMatrix();
+
     glColor3f(1.0, 1.0, 0.0);
-    glTranslated(35, 70, 0);
+    glTranslated(35, 100, 0);
     glutSolidSphere(5.2, 25, 20);
     glLineWidth(2.0);
     glBegin(GL_LINES);
@@ -285,12 +341,23 @@ void sun(void)
         float angle = i * (2.0 * M_PI / 5.2);
         float x1 = 0.0;
         float y1 = 0.0;
-        float x2 = 10 * cos(angle);
-        float y2 = 10 * sin(angle);
+        float x2 = 10 * 2 * cos(angle);
+        float y2 = 10 * 2 * sin(angle);
+        glVertex3f(x1, y1, 0.0);
+        glVertex3f(x2, y2, 0.0);
+    }
+    for (int i = 0; i < 6; i++)
+    {
+        float angle = i * (2.0 * M_PI / 5);
+        float x1 = 0.0;
+        float y1 = 0.0;
+        float x2 = 30 * cos(angle);
+        float y2 = 30 * sin(angle);
         glVertex3f(x1, y1, 0.0);
         glVertex3f(x2, y2, 0.0);
     }
     glEnd();
+
 }
 
 void pyramid(int frontFace = 20.0)
@@ -324,6 +391,7 @@ void pyramid(int frontFace = 20.0)
 
     glEnd();
 }
+
 
 void trees()
 {
@@ -470,22 +538,22 @@ static void display(void)
     cube(162.0 / 255, 205.0 / 255, 90.0 / 255);
     glPopMatrix();
 
-    // Background trees
-    glPushMatrix();
-    glTranslated(30,10,50);
-    glColor3f(0.0 / 255, 139.0 / 255, 69.0 / 255);
-    pyramid(5.0);
-    glPopMatrix();
-
     // SUN
     glPushMatrix();
     sun();
     glPopMatrix();
 
+    
     // Building
     glPushMatrix();
     glTranslated(10, 0, 0);
     building();
+    glPopMatrix();
+
+    // Building
+    glPushMatrix();
+    glTranslated(10, 0, 0);
+    gate();
     glPopMatrix();
 
     // Walls
