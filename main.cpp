@@ -66,6 +66,25 @@ static void getNormal3p(GLfloat x1, GLfloat y1, GLfloat z1, GLfloat x2, GLfloat 
     glNormal3f(Nx, Ny, Nz);
 }
 
+void circle(float centerX, float centerY, float radius)
+{
+    glBegin(GL_TRIANGLE_FAN);
+
+    int NUM_SEGMENTS = 24;
+
+    for (int i = 0; i <= NUM_SEGMENTS; i++)
+    {
+        float angle = 2.0 * 3.1416 * i / NUM_SEGMENTS;
+        float x = centerX + radius * cos(angle);
+        float y = centerY + radius * sin(angle);
+
+        glVertex2f(x, y);
+    }
+
+    glEnd();
+}
+
+
 void cube(float r, float g, float b)
 {
 
@@ -125,7 +144,7 @@ void renderBitmapString(float x, float y, void *font, const char *string)
     }
 }
 
-void building()
+void building(int hasExtension = 0)
 {
     // Building
     glPushMatrix();
@@ -133,6 +152,21 @@ void building()
     glScaled(70, 30, 20);
     cubeWithBorder(0.5, 0.1, 0.2, 100);
     glPopMatrix();
+
+    if (hasExtension == 1) {
+        glPushMatrix();
+        glTranslated(45, 30, 8);
+        glScaled(10, 15, 20);
+        cubeWithBorder(0.74, 0.74, 0.74, -100);
+        glPopMatrix();
+
+        // Extension top
+        glPushMatrix();
+        glTranslated(43, 43, 10);
+        glScaled(13, 2, 21);
+        cubeWithBorder(0.74, 0.74, 0.74, -100);
+        glPopMatrix();
+    }
 
     // Rooftop
     glPushMatrix();
@@ -232,6 +266,12 @@ void gate() {
         glPopMatrix();
     }
     
+
+    glPushMatrix();
+    glTranslated(40.5, 5.5, 97);
+    glColor3f(139.0/255, 131.0/255, 120.0/255);
+    circle(0.1, 0.1, 2.0);
+    glPopMatrix();
     
 }
 
@@ -431,23 +471,6 @@ void minar()
     glutSolidSphere(2.2, 28, 20);
 }
 
-void circle(float centerX, float centerY, float radius)
-{
-    glBegin(GL_TRIANGLE_FAN);
-
-    int NUM_SEGMENTS = 24;
-
-    for (int i = 0; i <= NUM_SEGMENTS; i++)
-    {
-        float angle = 2.0 * 3.1416 * i / NUM_SEGMENTS;
-        float x = centerX + radius * cos(angle);
-        float y = centerY + radius * sin(angle);
-
-        glVertex2f(x, y);
-    }
-
-    glEnd();
-}
 
 void flag()
 {
@@ -521,7 +544,7 @@ static void display(void)
     // Building 2
     glPushMatrix();
     glTranslated(30, 0, 0);
-    building();
+    building(1);
     glPopMatrix();
 
     // Building 3
