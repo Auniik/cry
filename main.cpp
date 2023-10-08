@@ -758,8 +758,12 @@ void stopAudio()
 int main(int argc, char **argv)
 {
     #ifdef __linux__
-    thread audioThread(playAudioAsync);
-    atexit(stopAudio);
+        thread audioThread(playAudioAsync);
+        atexit(stopAudio);
+    #endif
+
+    #ifdef _WIN32
+        PlaySound("music.wav", NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);
     #endif
 
     glutInit(&argc, argv);
@@ -777,7 +781,7 @@ int main(int argc, char **argv)
 
     glutMainLoop();
     #ifdef __linux__
-    audioThread.join();
+        audioThread.join();
     #endif
 
 
