@@ -11,8 +11,13 @@
 #include <GL/gl.h>
 #ifdef _WIN32
 #include <windows.h>
+#include<mmsystem.h>
 #endif
 #include <math.h>
+#include <cstdlib>
+
+
+
 
 using namespace std;
 
@@ -743,43 +748,21 @@ static void key(unsigned char key, int x, int y)
 
     glutPostRedisplay();
 }
-SDL_AudioDeviceID audioDevice;
-SDL_AudioSpec audioSpec;
-Uint8* audioBuffer;
-Uint32 audioLength;
 
-void audioCallback(void* userdata, Uint8* stream, int len) {
-    if (audioLength == 0)
-        return;
-
-    len = (len > audioLength) ? audioLength : len;
-    SDL_memcpy(stream, audioBuffer, len);
-    audioBuffer += len;
-    audioLength -= len;
+void playAudioAsync() {
+    int result = system("aplay music.wav");
 }
 
-void playBackgroundMusic() {
-    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
-        cerr << "Failed to initialize SDL audio: " << SDL_GetError() <<endl;
-        exit(1);
-    }
-
-    if (SDL_LoadWAV("music.wav", &audioSpec, &audioBuffer, &audioLength) == NULL) {
-        cerr << "Failed to load audio file: " << SDL_GetError() << endl;
-        exit(1);
-    }
-
-    audioDevice = SDL_OpenAudioDevice(NULL, 0, &audioSpec, NULL, 0);
-    if (audioDevice == 0) {
-        cerr << "Failed to open audio device: " << SDL_GetError() << endl;
-        exit(1);
-    }
-
-    SDL_PauseAudioDevice(audioDevice, 0); // Start audio playback
+void stopAudio() {
+    system("pkill aplay");
 }
+
 
 int main(int argc, char **argv)
 {
+    std::thread audioThread(playAudioAsync);
+    atexit(stopAudio);
+    
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -792,9 +775,9 @@ int main(int argc, char **argv)
 
     glutDisplayFunc(display);
     glutKeyboardFunc(key);
-    playBackgroundMusic();
+    
     glutMainLoop();
-
+    audioThread.join();
    
 
     return 0;
