@@ -757,8 +757,10 @@ void stopAudio()
 
 int main(int argc, char **argv)
 {
+    #ifdef __linux__
     thread audioThread(playAudioAsync);
     atexit(stopAudio);
+    #endif
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -774,7 +776,10 @@ int main(int argc, char **argv)
     glutKeyboardFunc(key);
 
     glutMainLoop();
+    #ifdef __linux__
     audioThread.join();
+    #endif
+
 
     return 0;
 }
