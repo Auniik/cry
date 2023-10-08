@@ -11,13 +11,10 @@
 #include <GL/gl.h>
 #ifdef _WIN32
 #include <windows.h>
-#include<mmsystem.h>
+#include <mmsystem.h>
 #endif
 #include <math.h>
 #include <cstdlib>
-
-
-
 
 using namespace std;
 
@@ -749,20 +746,21 @@ static void key(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-void playAudioAsync() {
+void playAudioAsync()
+{
     int result = system("aplay music.wav");
 }
 
-void stopAudio() {
+void stopAudio()
+{
     system("pkill aplay");
 }
-
 
 int main(int argc, char **argv)
 {
     std::thread audioThread(playAudioAsync);
     atexit(stopAudio);
-    
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -775,10 +773,9 @@ int main(int argc, char **argv)
 
     glutDisplayFunc(display);
     glutKeyboardFunc(key);
-    
+
     glutMainLoop();
     audioThread.join();
-   
 
     return 0;
 }
