@@ -757,7 +757,7 @@ void stopAudio()
 
 int main(int argc, char **argv)
 {
-    std::thread audioThread(playAudioAsync);
+    thread audioThread(playAudioAsync);
     atexit(stopAudio);
 
     glutInit(&argc, argv);

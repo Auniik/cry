@@ -11,6 +11,9 @@
         "*.tcc": "cpp",
         "fstream": "cpp",
         "complex": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "condition_variable": "cpp",
+        "stacktrace": "cpp",
+        "thread": "cpp"
     }
 }
