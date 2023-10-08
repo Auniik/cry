@@ -5,7 +5,6 @@
 #else
 #include <GL/glut.h>
 #endif
-#include <SDL2/SDL.h>
 #include <stdlib.h>
 #include <bits/stdc++.h>
 #include <GL/gl.h>
