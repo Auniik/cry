@@ -10,6 +10,7 @@
         "bit": "cpp",
         "*.tcc": "cpp",
         "fstream": "cpp",
-        "complex": "cpp"
+        "complex": "cpp",
+        "iostream": "cpp"
     }
 }

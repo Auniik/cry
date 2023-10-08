@@ -5,11 +5,13 @@
 #else
 #include <GL/glut.h>
 #endif
-
+#include <SDL2/SDL.h>
 #include <stdlib.h>
 #include <bits/stdc++.h>
 #include <GL/gl.h>
-// #include<windows.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 #include <math.h>
 
 using namespace std;
@@ -731,15 +733,49 @@ static void key(unsigned char key, int x, int y)
         lookX = lookX - 1;
         break;
 
-    case '+':
+    case '-':
         eyeZ = eyeZ + 1;
         break;
-    case '-':
+    case '+':
         eyeZ = eyeZ - 1;
         break;
     }
 
     glutPostRedisplay();
+}
+SDL_AudioDeviceID audioDevice;
+SDL_AudioSpec audioSpec;
+Uint8* audioBuffer;
+Uint32 audioLength;
+
+void audioCallback(void* userdata, Uint8* stream, int len) {
+    if (audioLength == 0)
+        return;
+
+    len = (len > audioLength) ? audioLength : len;
+    SDL_memcpy(stream, audioBuffer, len);
+    audioBuffer += len;
+    audioLength -= len;
+}
+
+void playBackgroundMusic() {
+    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+        cerr << "Failed to initialize SDL audio: " << SDL_GetError() <<endl;
+        exit(1);
+    }
+
+    if (SDL_LoadWAV("music.wav", &audioSpec, &audioBuffer, &audioLength) == NULL) {
+        cerr << "Failed to load audio file: " << SDL_GetError() << endl;
+        exit(1);
+    }
+
+    audioDevice = SDL_OpenAudioDevice(NULL, 0, &audioSpec, NULL, 0);
+    if (audioDevice == 0) {
+        cerr << "Failed to open audio device: " << SDL_GetError() << endl;
+        exit(1);
+    }
+
+    SDL_PauseAudioDevice(audioDevice, 0); // Start audio playback
 }
 
 int main(int argc, char **argv)
@@ -756,7 +792,10 @@ int main(int argc, char **argv)
 
     glutDisplayFunc(display);
     glutKeyboardFunc(key);
+    playBackgroundMusic();
     glutMainLoop();
+
+   
 
     return 0;
 }
