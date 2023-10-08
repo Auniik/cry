@@ -185,6 +185,7 @@ void building(int hasExtension = 0)
     cubeWithBorder(0.74, 0.74, 0.74, 20);
     glPopMatrix();
 
+    // Gate
     for (float i = 30.5; i < 30.5 + 9.5; i = i + 0.7)
     {
         glPushMatrix();
@@ -194,9 +195,10 @@ void building(int hasExtension = 0)
         glPopMatrix();
     }
 
+    // Line 1
     for (int i = 10; i <= 60; i = i + 10)
     {
-        // Line 1
+        
         glPushMatrix();
         glTranslated(i, 0, 31);
         glScaled(0.7, 30, 0);
@@ -295,6 +297,7 @@ void sideTree()
     glutSolidSphere(3, 5, 5);
     glPopMatrix();
 
+    // 
     for (int i = 0; i < 50; i = i + 2)
     {
         glPushMatrix();
@@ -660,7 +663,7 @@ static void display(void)
     building(1);
     glPopMatrix();
 
-    // Building 3
+    // Side tree
     glPushMatrix();
     glTranslated(115, 0, 15);
     sideTree();
@@ -747,7 +750,7 @@ static void key(unsigned char key, int x, int y)
 
 void playAudioAsync()
 {
-    int result = system("aplay music.wav");
+    system("aplay music.wav");
 }
 
 void stopAudio()
